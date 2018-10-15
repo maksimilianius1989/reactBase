@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import CommentList from './CommentList'
 
-class Article extends Component {
+class Article extends PureComponent {
     static propTypes = {
         article: PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -13,25 +13,17 @@ class Article extends Component {
         toggleOpen: PropTypes.func
     }
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            isOpen: props.defaultOpen
-        }
+    state = {
+        updateIndex: 0
     }
 
-    componentWillMount() {
-        // console.log('----->', 'will');
-    }
-
-    componentWillReceiveProps(nextProps) {
-        // console.log('----->', 'updating', this.props.isOpen, nextProps.isOpen);
-    }
+/*    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.isOpen !== this.props.isOpen
+    }*/
 
     render() {
-        // console.log('----->', 'render');
         const {article, isOpen, toggleOpen} = this.props
+        console.log('----->', 'update article')
         return (
             <div ref={this.setContainerRef}>
                 <h3>{article.title}</h3>
@@ -58,7 +50,12 @@ class Article extends Component {
         return (
             <section>
                 {article.text}
-                <CommentList comment = {article.comments} ref={this.setCommentsRef}/>
+                <button
+                    onClick={() => {
+                        this.setState({updateIndex: this.state.updateIndex + 1})
+                    }}
+                >update</button>
+                <CommentList comment = {article.comments} ref={this.setCommentsRef} key={this.state.updateIndex}/>
             </section>
         )
     }
