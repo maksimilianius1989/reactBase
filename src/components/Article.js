@@ -1,6 +1,8 @@
 import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import CommentList from './CommentList'
+import { CSSTransitionGroup } from 'react-transition-group'
+import './article.css'
 
 class Article extends PureComponent {
     static propTypes = {
@@ -17,20 +19,20 @@ class Article extends PureComponent {
         updateIndex: 0
     }
 
-/*    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.isOpen !== this.props.isOpen
-    }*/
-
     render() {
         const {article, isOpen, toggleOpen} = this.props
-        console.log('----->', 'update article')
         return (
             <div ref={this.setContainerRef}>
                 <h3>{article.title}</h3>
                 <button onClick = {toggleOpen}>
                     {isOpen ? "Close" : "Open"}
                 </button>
-                {this.getBody()}
+                <CSSTransitionGroup
+                    transitionName = 'article'
+                    transitionEnterTimeout={300}
+                    transitionLeaveTimeout={500}>
+                    {this.getBody()}
+                </CSSTransitionGroup>
             </div>
         )
     }
