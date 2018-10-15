@@ -22,15 +22,15 @@ class Article extends Component {
     }
 
     componentWillMount() {
-        console.log('----->', 'will');
+        // console.log('----->', 'will');
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('----->', 'updating', this.props.isOpen, nextProps.isOpen);
+        // console.log('----->', 'updating', this.props.isOpen, nextProps.isOpen);
     }
 
     render() {
-        console.log('----->', 'render');
+        // console.log('----->', 'render');
         const {article, isOpen, toggleOpen} = this.props
         return (
             <div ref={this.setContainerRef}>
@@ -44,12 +44,12 @@ class Article extends Component {
     }
 
     setContainerRef = ref => {
-        this.container = ref
-        console.log('----->r', ref)
+        // this.container = ref
+        // console.log('----->r', ref)
     }
 
     componentDidMount() {
-        console.log('----->', 'did');
+        // console.log('----->', 'did');
     }
 
     getBody () {

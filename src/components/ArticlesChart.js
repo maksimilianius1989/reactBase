@@ -6,7 +6,7 @@ class ArticlesChart extends Component {
     }
 
     componentDidMount() {
-        console.log('-----> my this.refs.chart', this.refs.chart);
+        // console.log('-----> my this.refs.chart', this.refs.chart);
     }
 
     render() {
