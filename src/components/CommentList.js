@@ -12,6 +12,13 @@ function CommentList({comments = [], isOpen, toggleOpen}) {
     )
 }
 
+CommentList.propTypes = {
+    comments: PropTypes.array,
+    // from toggleOpen decorator
+    isOpen: PropTypes.bool,
+    toggleOpen: PropTypes.func
+}
+
 function getBody ({comments, isOpen}) {
     if (!isOpen) return null
     if (!comments.length) return <p>No comments yet</p>

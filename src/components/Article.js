@@ -8,7 +8,9 @@ class Article extends Component {
             id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string
-        }).isRequired
+        }).isRequired,
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func
     }
 
     constructor(props) {
@@ -56,12 +58,12 @@ class Article extends Component {
         return (
             <section>
                 {article.text}
-                <CommentList comment = {article.comments} ref={this.testCommentList}/>
+                <CommentList comment = {article.comments} ref={this.setCommentsRef}/>
             </section>
         )
     }
 
-    testCommentList = ref => {
+    setCommentsRef = ref => {
         console.log('----->', 'ref', ref)
     }
 }
