@@ -12,12 +12,27 @@ class Article extends Component {
         }).isRequired
     }
 
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            isOpen: props.defaultOpen
+        }
+    }
+
+    componentWillMount() {
+        console.log('----->', 'will');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('----->', 'updating', this.props.isOpen, nextProps.isOpen);
+    }
+
     render() {
-        console.log('-----> this.props', this.props);
+        console.log('----->', 'render');
         const {article, isOpen, toggleOpen} = this.props
-        console.log('-----> {article}', article);
         return (
-            <div>
+            <div ref={this.setContainerRef}>
                 <h3>{article.title}</h3>
                 <button onClick = {toggleOpen}>
                     {isOpen ? "Close" : "Open"}
@@ -27,15 +42,28 @@ class Article extends Component {
         )
     }
 
+    setContainerRef = ref => {
+        this.container = ref
+        console.log('----->r', ref)
+    }
+
+    componentDidMount() {
+        console.log('----->', 'did');
+    }
+
     getBody () {
         const {article, isOpen} = this.props
         if (!isOpen) return null
         return (
             <section>
                 {article.text}
-                <CommentList comment = {article.comments}/>
+                <CommentList comment = {article.comments} ref={this.testCommentList}/>
             </section>
         )
+    }
+
+    testCommentList = ref => {
+        console.log('----->', 'ref', ref)
     }
 }
 
